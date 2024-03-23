@@ -1,0 +1,16 @@
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
+const PORT = process.env.PORT || 5000; // Default to port 5000 if PORT is not provided in environment
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // Use urlencoded middleware for handling form submissions
+
+app.use("/api/notes", require("./routes/notes"));
+
+app.listen(PORT, () => {
+  console.log(`Your Server Is Live On Port ${PORT}`);
+});
