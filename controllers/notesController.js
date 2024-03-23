@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const jsend = require("jsend");
+const Notes = require("../model/Note");
 
 const GetAllNotes = asyncHandler((req, res) => {
   res.status(200).json(jsend.success("AllNotes"));

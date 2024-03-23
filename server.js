@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const connectDB = require("./config/db");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 5000; // Default to port 5000 if PORT is not provided in environment
@@ -12,5 +13,6 @@ app.use(express.urlencoded({ extended: true })); // Use urlencoded middleware fo
 app.use("/api/notes", require("./routes/notes"));
 
 app.listen(PORT, () => {
+  connectDB();
   console.log(`Your Server Is Live On Port ${PORT}`);
 });
