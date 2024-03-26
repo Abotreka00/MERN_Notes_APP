@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Use urlencoded middleware for handling form submissions
 
 app.use("/api/notes", require("./routes/notes"));
+app.use("/api/users", require("./routes/Users"));
 
 app.listen(PORT, () => {
   connectDB();

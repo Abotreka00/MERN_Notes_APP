@@ -9,7 +9,8 @@ const isValidMongoId = (id) => {
 };
 
 const GetAllNotes = asyncHandler(async (req, res) => {
-  const result = await Notes.find({}, { __v: false });
+  const userId = req.userId;
+  const result = await Notes.find({ userId }, { __v: false });
   res.status(200).json(jsend.success(result));
 });
 
@@ -26,14 +27,12 @@ const SingleNotes = asyncHandler(async (req, res) => {
 });
 
 const CreateNotes = asyncHandler(async (req, res) => {
-  const { userId, title, description, color, createdAt } = req.body;
+  const userId = req.userId;
+  const { title, description, color, createdAt } = req.body;
 
   const schema = Joi.object({
-    userId: Joi.string().min(5).max(20).required(),
     title: Joi.string().min(5).max(20).required(),
     description: Joi.string().min(5).max(200).required(),
-    color: Joi.string(),
-    createdAt: Joi.string(),
   });
   const { error } = schema.validate(req.body);
   if (error) {
